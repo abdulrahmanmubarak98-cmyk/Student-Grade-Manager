@@ -1,44 +1,72 @@
+import os
 import json
-while True:
-    print("menu")
-    print("1. Add student & grade")
-    print("2. view all students")
-    print("3. calculate average grade")
-    print("4. exit")
 
-    choice = input("select an option (1/2/3/4): ")  
+while True:
+    print("1. Add student & Grade")
+    print("2. View all student")
+    print("3. Calculate average grade")
+    print("0. Exit")
+
+    choice = input("Select an option: ")
+
     if choice == "1":
         Name = input("Enter student name: ").lower()
-        Grade = float(input("Enter student grade: "))
-## using json to store student data
-        file = open("student.json", "r")
-        student = json.load(file)
-        file.close()
+        Score = float(input("Enter student score: "))
 
-        student[Name] = Grade
+        if os.path.exists("pupil.json"):
+            with open("pupil.json", "r") as file:
+                pupil = json.load(file)
 
-        file = open("student.json", "w")
-        json.dump(student, file)
-        file.close()
-## using json to read student data 
+        else:
+            pupil = {"Grade": []}
+
+        new_entry = {
+                "Name": Name,
+                "Score": Score
+            }
+        pupil["Grade"].append(new_entry)
+        print("Updated")
+
+        with open("pupil.json", "w") as file:
+            json.dump(pupil, file, indent=4)
+
     elif choice == "2":
-        file = open("student.json", "r")
-        student = json.load(file)
-        for Name, Grade in student.items():
-            print(f"{Name}: {Grade}")
-        file.close()
-      ## calculate average grade  
+        with open("pupil.json", "r") as file:
+            pupil = json.load(file)
+
+        for student in pupil["Grade"]:
+            if "name" in student and "score" in student:
+                print(f"name: {student['name']}, score: {student['score']}")
+
     elif choice == "3":
-        file = open("student.json", "r")
-        student = json.load(file)
-        total = sum(student.values())
-        average = total / len(student) if student else 0
-        print(f"Average grade: {average}")
-        file.close()
-## exit the app
-    elif choice == "4":
-        print("Thank you for using this app.")
+        with open("pupil.json", "r") as file:
+            pupil = json.load(file)
+
+        total = 0
+        count = 0
+
+        for student in pupil["Grade"]:
+            score = student.get("score")
+
+            if isinstance(score, (int, float)):
+                total += score
+                count += 1
+
+        if count > 0:
+            average = total / count
+            print(f"Average score: {round(average, 2)}")
+        else:
+            print("No valid scores found")
+
+    elif choice == "0":
+        print("Goodbye!")
         break
 
     else:
-        print("invalid option")
+        print("Invalid option")
+
+
+
+            
+
+            
