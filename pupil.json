@@ -1,0 +1,40 @@
+{
+    "Grade": [
+        {
+            "name": "mubarak",
+            "score": "95"
+        },
+        {
+            "name": "Al-mustapha",
+            "score": "90"
+        },
+        {
+            "name": "attaullah",
+            "score": "100"
+        },
+        {
+            "name": "farouk",
+            "score": 80.0
+        },
+        {
+            "name": "musa",
+            "score": 91.0
+        },
+        {
+            "name": "yusuf",
+            "score": 90.0
+        },
+        {
+            "name": "adogu",
+            "score": 97.0
+        },
+        {
+            "name": "haruna",
+            "score": 81.0
+        },
+        {
+            "Name": "nasiru",
+            "Score": 81.0
+        }
+    ]
+}
